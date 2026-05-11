@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Clinical Significance</title>
+    <meta name="description" content="Clinical interpretation and risk level assessment">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical" class="active">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Clinical Significance</h1>
+            <p>Detailed clinical interpretation and risk assessment from AI analysis.</p>
+        </header>
+
+        <!-- No data state -->
+        <div id="no-data-msg" class="glass-card empty-card" style="display:none;">
+            <div class="empty-icon">🏥</div>
+            <h3>No Clinical Data Available</h3>
+            <p>Please <a href="/submit">submit a DNA sequence</a> first to view clinical significance results.</p>
+        </div>
+
+        <div id="clinical-results" style="display:none;">
+            <div class="results-grid-3">
+                <!-- Clinical Significance Card -->
+                <div class="glass-card result-card clinical-card fade-in">
+                    <h3 class="card-title">Clinical Significance</h3>
+                    <div class="clinical-badge" id="clinical-badge">
+                        <span class="clinical-text" id="clinical-significance">—</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Clinical Confidence</span>
+                        <div class="metric-value-container">
+                            <span class="metric-value" id="clinical-confidence">0%</span>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="clinical-confidence-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="explanation-text" id="clinical-explanation"></div>
+                </div>
+
+                <!-- Risk Level Card -->
+                <div class="glass-card result-card risk-card fade-in">
+                    <h3 class="card-title">Risk Level Assessment</h3>
+                    <div class="risk-display" id="risk-display">
+                        <div class="risk-circle" id="risk-circle">
+                            <span id="risk-level">Low</span>
+                        </div>
+                    </div>
+                    <p class="risk-desc" id="risk-description"></p>
+                </div>
+
+                <!-- Gene Prediction -->
+                <div class="glass-card result-card gene-card fade-in">
+                    <h3 class="card-title">Genetic Prediction</h3>
+                    <div class="gene-info">
+                        <div class="gene-detail">
+                            <span class="detail-label">Predicted Gene</span>
+                            <span class="detail-value highlight-blue" id="predicted-gene">—</span>
+                        </div>
+                        <div class="gene-detail">
+                            <span class="detail-label">Associated Disease</span>
+                            <span class="detail-value" id="predicted-disease">—</span>
+                        </div>
+                    </div>
+                    <div class="metric-row" style="margin-top: 1.5rem;">
+                        <span class="metric-label">Gene Attribution Confidence</span>
+                        <div class="metric-value-container">
+                            <span class="metric-value" id="gene-confidence">0%</span>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="gene-confidence-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

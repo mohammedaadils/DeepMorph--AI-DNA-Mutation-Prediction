@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Assessment History</title>
+    <meta name="description" content="Review past genomic analysis assessments and results">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page" class="active">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Assessment History</h1>
+            <p>Review all past DNA sequence analyses and their results.</p>
+        </header>
+
+        <div class="glass-card table-card">
+            <div class="table-responsive">
+                <table class="data-table" id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Patient ID</th>
+                            <th>Sequence</th>
+                            <th>Mutation Status</th>
+                            <th>Risk Level</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body">
+                        <tr>
+                            <td colspan="6" class="empty-state">Loading assessment history...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

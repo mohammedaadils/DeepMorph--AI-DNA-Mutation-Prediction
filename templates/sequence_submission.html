@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — DNA Sequence Submission</title>
+    <meta name="description" content="Submit a DNA sequence for AI-powered mutation analysis">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit" class="active">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>DNA Sequence Submission</h1>
+            <p>Enter a 100 base-pair DNA sequence for AI-powered mutation screening and analysis.</p>
+        </header>
+
+        <div class="submission-layout">
+            <div class="glass-card submission-card">
+                <!-- Patient Selection -->
+                <div class="form-group">
+                    <label for="seq-patient-select">Assign to Patient (Optional)</label>
+                    <select id="seq-patient-select">
+                        <option value="">— No patient selected —</option>
+                    </select>
+                </div>
+
+                <!-- DNA Input -->
+                <div class="input-header">
+                    <h2 class="card-title">DNA Sequence Input</h2>
+                    <div class="counter-badge" id="counter-badge">
+                        <span id="char-counter">0</span><span class="counter-max">/100</span>
+                    </div>
+                </div>
+
+                <textarea id="dna-input" spellcheck="false" autocomplete="off"
+                    placeholder="Enter exactly 100 base pairs (A, T, G, C)&#10;&#10;Example: ATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGCATGC"></textarea>
+
+                <div class="validation-warning" id="validation-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>Sequence must be exactly 100 bases (A, T, G, C only).</span>
+                </div>
+
+                <div class="sequence-info-bar">
+                    <div class="base-counts">
+                        <span class="base-tag a-tag">A: <b id="count-a">0</b></span>
+                        <span class="base-tag t-tag">T: <b id="count-t">0</b></span>
+                        <span class="base-tag g-tag">G: <b id="count-g">0</b></span>
+                        <span class="base-tag c-tag">C: <b id="count-c">0</b></span>
+                    </div>
+                </div>
+
+                <div class="form-actions" style="margin-top: 1.5rem;">
+                    <button id="analyze-btn" class="primary-btn" disabled>
+                        <span class="btn-text">🔬 Analyze Sequence</span>
+                        <div class="btn-loader" id="analyze-loader">
+                            <div class="spinner-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            <span>Analyzing...</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Side Panel: Instructions -->
+            <div class="glass-card info-panel">
+                <h3 class="card-title">🧬 Submission Guide</h3>
+                <ul class="guide-list">
+                    <li><strong>Valid Bases:</strong> Only A, T, G, C accepted</li>
+                    <li><strong>Length:</strong> Exactly 100 base pairs required</li>
+                    <li><strong>Format:</strong> Letters auto-uppercase on input</li>
+                    <li><strong>Patient:</strong> Optionally link to a registered patient</li>
+                    <li><strong>Result:</strong> After analysis, review results on Mutation Analysis page</li>
+                </ul>
+                <div class="guide-note">
+                    <strong>Tip:</strong> The DeepMorph CNN-LSTM model analyzes nucleotide patterns to detect mutations,
+                    predict affected genes, and assess clinical significance.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

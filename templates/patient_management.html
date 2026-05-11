@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Patient Management</title>
+    <meta name="description" content="Manage patient records for genomic analysis">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page" class="active">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Patient Management</h1>
+            <p>Create, search, update, and manage patient records.</p>
+        </header>
+
+        <div class="two-col-layout">
+            <!-- Create / Edit Patient Form -->
+            <div class="glass-card form-card">
+                <h2 class="card-title" id="form-title">Register New Patient</h2>
+                <form id="patient-form">
+                    <input type="hidden" id="edit-patient-id">
+                    <div class="form-group">
+                        <label for="patient-name">Full Name</label>
+                        <input type="text" id="patient-name" placeholder="Enter patient full name" required>
+                    </div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label for="patient-age">Age</label>
+                            <input type="number" id="patient-age" placeholder="Age" min="0" max="150" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-gender">Gender</label>
+                            <select id="patient-gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn" id="patient-submit-btn">
+                            <span class="btn-text">Create Patient</span>
+                        </button>
+                        <button type="button" class="secondary-btn" id="cancel-edit-btn" style="display:none;"
+                            onclick="cancelEdit()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Patient List -->
+            <div class="glass-card">
+                <div class="card-header-row">
+                    <h2 class="card-title">Patient Records</h2>
+                    <div class="search-box">
+                        <input type="text" id="patient-search" placeholder="Search patients...">
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table" id="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patient-table-body">
+                            <tr>
+                                <td colspan="5" class="empty-state">No patients registered yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

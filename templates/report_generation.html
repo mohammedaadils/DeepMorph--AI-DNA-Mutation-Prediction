@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Report Generation</title>
+    <meta name="description" content="Generate professional clinical PDF reports from genomic analysis results">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report" class="active">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Clinical Report Generation</h1>
+            <p>Generate a professional PDF report from the latest genomic analysis.</p>
+        </header>
+
+        <!-- No data state -->
+        <div id="no-data-msg" class="glass-card empty-card" style="display:none;">
+            <div class="empty-icon">📄</div>
+            <h3>No Analysis Data for Report</h3>
+            <p>Please <a href="/submit">submit a DNA sequence</a> and complete an analysis first to generate a report.
+            </p>
+        </div>
+
+        <div id="report-content" style="display:none;">
+            <!-- Report Preview -->
+            <div class="report-layout">
+                <div class="glass-card report-preview">
+                    <h2 class="card-title">📋 Report Preview</h2>
+
+                    <div class="report-section">
+                        <h3>Patient Information</h3>
+                        <div class="report-grid">
+                            <div class="report-item"><span class="report-label">Patient ID</span><span
+                                    class="report-value" id="rpt-patient-id">N/A</span></div>
+                            <div class="report-item"><span class="report-label">Name</span><span class="report-value"
+                                    id="rpt-patient-name">N/A</span></div>
+                            <div class="report-item"><span class="report-label">Age</span><span class="report-value"
+                                    id="rpt-patient-age">N/A</span></div>
+                            <div class="report-item"><span class="report-label">Gender</span><span class="report-value"
+                                    id="rpt-patient-gender">N/A</span></div>
+                            <div class="report-item"><span class="report-label">Date of Analysis</span><span
+                                    class="report-value" id="rpt-timestamp">—</span></div>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3>Mutation Analysis</h3>
+                        <div class="report-grid">
+                            <div class="report-item"><span class="report-label">Mutation Status</span><span
+                                    class="report-value" id="rpt-mutation-status">—</span></div>
+                            <div class="report-item"><span class="report-label">Confidence</span><span
+                                    class="report-value" id="rpt-mutation-conf">—</span></div>
+                            <div class="report-item"><span class="report-label">Hotspot Location</span><span
+                                    class="report-value" id="rpt-hotspot">—</span></div>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3>Clinical Interpretation</h3>
+                        <div class="report-grid">
+                            <div class="report-item"><span class="report-label">Significance</span><span
+                                    class="report-value" id="rpt-clinical-sig">—</span></div>
+                            <div class="report-item"><span class="report-label">Risk Level</span><span
+                                    class="report-value" id="rpt-risk-level">—</span></div>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3>Genetic Prediction</h3>
+                        <div class="report-grid">
+                            <div class="report-item"><span class="report-label">Gene</span><span class="report-value"
+                                    id="rpt-gene">—</span></div>
+                            <div class="report-item"><span class="report-label">Gene Confidence</span><span
+                                    class="report-value" id="rpt-gene-conf">—</span></div>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3>Disease Intelligence</h3>
+                        <div class="report-grid full-width">
+                            <div class="report-item"><span class="report-label">Disease</span><span class="report-value"
+                                    id="rpt-disease">—</span></div>
+                            <div class="report-item full"><span class="report-label">Description</span><span
+                                    class="report-value" id="rpt-disease-desc">—</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="glass-card generate-panel">
+                    <div class="generate-icon">📄</div>
+                    <h3>Generate Clinical Report</h3>
+                    <p>Create a structured PDF document containing all analysis results and patient information.</p>
+                    <button id="generate-pdf-btn" class="primary-btn w-full">
+                        <span class="btn-text">📥 Generate Clinical Report</span>
+                        <div class="btn-loader" id="generate-loader">
+                            <div class="spinner-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            <span>Generating PDF...</span>
+                        </div>
+                    </button>
+                    <div id="generate-success" class="success-msg" style="display:none;">
+                        ✅ Report generated and downloaded successfully.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

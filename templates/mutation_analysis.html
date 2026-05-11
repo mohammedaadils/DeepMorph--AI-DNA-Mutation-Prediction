@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Mutation Analysis</title>
+    <meta name="description" content="Mutation prediction results with hotspot detection and DNA helix visualization">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation" class="active">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Mutation Analysis</h1>
+            <p>AI-powered mutation detection results and hotspot visualization.</p>
+        </header>
+
+        <!-- No data state -->
+        <div id="no-data-msg" class="glass-card empty-card" style="display:none;">
+            <div class="empty-icon">🧬</div>
+            <h3>No Analysis Data Available</h3>
+            <p>Please <a href="/submit">submit a DNA sequence</a> first to view mutation analysis results.</p>
+        </div>
+
+        <!-- Results -->
+        <div id="mutation-results" style="display:none;">
+            <div class="results-grid-2">
+                <!-- Mutation Status Card -->
+                <div class="glass-card result-card fade-in">
+                    <h3 class="card-title">Mutation Status</h3>
+                    <div class="status-badge" id="mutation-status-badge">
+                        <span class="status-icon" id="mutation-icon">✓</span>
+                        <span class="status-text" id="mutation-status">Non-Mutated</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Confidence Score</span>
+                        <div class="metric-value-container">
+                            <span class="metric-value" id="mutation-confidence">0%</span>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="mutation-confidence-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotspot Card -->
+                <div class="glass-card result-card fade-in">
+                    <h3 class="card-title">Mutation Hotspot</h3>
+                    <div class="hotspot-info">
+                        <div class="hotspot-detail">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value highlight" id="hotspot-position">—</span>
+                        </div>
+                        <div class="hotspot-detail">
+                            <span class="detail-label">Reference Base</span>
+                            <span class="detail-value" id="hotspot-ref">—</span>
+                        </div>
+                        <div class="hotspot-detail">
+                            <span class="detail-label">Observed Base</span>
+                            <span class="detail-value mutated-text" id="hotspot-obs">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DNA Helix Visualization -->
+            <div class="glass-card helix-card fade-in">
+                <h3 class="card-title">DNA Helix Visualization — Mutation Hotspot</h3>
+                <p class="card-desc">Each node represents a base pair. <span class="legend-blue">● Normal</span> &nbsp;
+                    <span class="legend-red">● Mutation Hotspot</span></p>
+                <div class="canvas-container">
+                    <canvas id="hotspot-canvas" width="1000" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/hotspot.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,247 @@
+{
+  "Familial Adenomatous Polyposis": {
+    "description": "Familial Adenomatous Polyposis (FAP) is an inherited colorectal cancer syndrome caused by mutations in the APC gene. It leads to the development of hundreds to thousands of polyps in the colon and rectum during adolescence or early adulthood. If untreated, these polyps almost inevitably progress to colorectal cancer.",
+    "symptoms": [
+      "Multiple colon polyps",
+      "Blood in stool",
+      "Abdominal pain",
+      "Unexplained weight loss"
+    ],
+    "treatments": [
+      "Endoscopic Polyp Removal: Colonoscopic procedures are used to remove precancerous polyps and delay cancer progression.",
+      "Chemoprevention Therapy: Medications may be used to reduce polyp growth and slow disease progression."
+    ],
+    "surgery": [
+      "Colectomy: Surgical removal of the colon to prevent colorectal cancer in high-risk individuals."
+    ],
+    "global_death_rate": "High mortality if untreated",
+    "yearly_deaths": "Part of approximately 935000 colorectal cancer deaths annually worldwide"
+  },
+
+  "Ataxia-Telangiectasia": {
+    "description": "Ataxia-Telangiectasia is a rare inherited neurodegenerative disorder caused by mutations in the ATM gene. It affects the nervous system, immune system, and DNA repair mechanisms, increasing susceptibility to infections and cancer.",
+    "symptoms": [
+      "Loss of coordination (ataxia)",
+      "Frequent respiratory infections",
+      "Dilated blood vessels in eyes and skin",
+      "Delayed motor development"
+    ],
+    "treatments": [
+      "Immunoglobulin Therapy: Helps strengthen the immune system and reduce infections.",
+      "Physical Therapy: Improves mobility and coordination."
+    ],
+    "surgery": [
+      "Tumor Removal Surgery: Performed when cancer develops as a complication of the disorder."
+    ],
+    "global_death_rate": "Rare disease with reduced life expectancy",
+    "yearly_deaths": "Several thousand cases globally with mortality related to cancer and infections"
+  },
+
+  "Hereditary Breast and Ovarian Cancer": {
+    "description": "Hereditary Breast and Ovarian Cancer syndrome is caused by inherited mutations in BRCA1 or BRCA2 genes that impair DNA repair. Individuals with these mutations have a significantly increased lifetime risk of breast, ovarian, and other cancers.",
+    "symptoms": [
+      "Breast lumps",
+      "Persistent pelvic pain",
+      "Family history of cancer",
+      "Changes in breast appearance"
+    ],
+    "treatments": [
+      "Chemotherapy: Uses cytotoxic drugs to destroy rapidly dividing cancer cells.",
+      "Targeted Therapy: Drugs such as PARP inhibitors specifically target BRCA-related cancer pathways."
+    ],
+    "surgery": [
+      "Mastectomy: Removal of breast tissue to eliminate tumors or reduce cancer risk.",
+      "Oophorectomy: Removal of ovaries to prevent ovarian cancer development."
+    ],
+    "global_death_rate": "Breast cancer mortality rate approx. 6.9%",
+    "yearly_deaths": "Approximately 666000 breast cancer deaths annually worldwide"
+  },
+
+  "Duchenne Muscular Dystrophy": {
+    "description": "Duchenne Muscular Dystrophy is a severe X-linked genetic disorder caused by mutations in the dystrophin gene. The absence of dystrophin leads to progressive degeneration of skeletal and cardiac muscles.",
+    "symptoms": [
+      "Progressive muscle weakness",
+      "Difficulty walking",
+      "Frequent falls",
+      "Enlarged calf muscles"
+    ],
+    "treatments": [
+      "Corticosteroid Therapy: Helps slow muscle degeneration and maintain mobility.",
+      "Gene Therapy: Experimental treatments aim to restore dystrophin production."
+    ],
+    "surgery": [
+      "Spinal Surgery: Corrects scoliosis caused by muscle weakness.",
+      "Cardiac Device Implantation: Pacemakers may help manage heart complications."
+    ],
+    "global_death_rate": "Reduced life expectancy without treatment",
+    "yearly_deaths": "Thousands of deaths globally due to respiratory or cardiac complications"
+  },
+
+  "Primary Ciliary Dyskinesia": {
+    "description": "Primary Ciliary Dyskinesia is a genetic disorder affecting the function of cilia lining the respiratory tract. Impaired ciliary movement leads to chronic respiratory infections and impaired mucus clearance.",
+    "symptoms": [
+      "Chronic cough",
+      "Frequent respiratory infections",
+      "Sinusitis",
+      "Reduced lung function"
+    ],
+    "treatments": [
+      "Airway Clearance Therapy: Techniques to remove mucus from the lungs.",
+      "Antibiotic Therapy: Used to control recurrent respiratory infections."
+    ],
+    "surgery": [
+      "Lung Transplant: Performed in severe cases of advanced lung damage."
+    ],
+    "global_death_rate": "Low mortality with proper treatment",
+    "yearly_deaths": "Rare disease with limited global mortality data"
+  },
+
+  "Marfan Syndrome": {
+    "description": "Marfan Syndrome is a connective tissue disorder caused by mutations in the FBN1 gene. It affects the heart, blood vessels, skeleton, and eyes, with the most serious complications involving the aorta.",
+    "symptoms": [
+      "Tall and slender body",
+      "Long limbs and fingers",
+      "Heart murmurs",
+      "Vision problems"
+    ],
+    "treatments": [
+      "Beta Blockers: Reduce stress on the aorta and slow enlargement of blood vessels.",
+      "Angiotensin Receptor Blockers: Help control blood pressure and reduce cardiovascular complications."
+    ],
+    "surgery": [
+      "Aortic Root Replacement: Replaces weakened portions of the aorta to prevent rupture."
+    ],
+    "global_death_rate": "Rare disease affecting about 1 in 5000 people",
+    "yearly_deaths": "Deaths primarily due to untreated aortic rupture"
+  },
+
+  "Nemaline Myopathy": {
+    "description": "Nemaline Myopathy is a genetic neuromuscular disorder characterized by muscle weakness due to abnormalities in muscle fibers. It primarily affects skeletal muscles responsible for movement and breathing.",
+    "symptoms": [
+      "Muscle weakness",
+      "Delayed motor development",
+      "Breathing difficulties",
+      "Reduced muscle tone"
+    ],
+    "treatments": [
+      "Physical Therapy: Helps maintain muscle strength and mobility.",
+      "Respiratory Support Therapy: Supports breathing in severe cases."
+    ],
+    "surgery": [
+      "Spinal Surgery: May be required to correct skeletal deformities."
+    ],
+    "global_death_rate": "Rare disease with variable severity",
+    "yearly_deaths": "Mortality mainly related to respiratory complications"
+  },
+
+  "Neurofibromatosis Type 1": {
+    "description": "Neurofibromatosis Type 1 is a genetic disorder characterized by the growth of tumors along nerves in the skin, brain, and other parts of the body.",
+    "symptoms": [
+      "Café-au-lait skin spots",
+      "Skin tumors",
+      "Learning disabilities",
+      "Vision problems"
+    ],
+    "treatments": [
+      "Targeted Therapy: Drugs used to slow tumor growth.",
+      "Radiation Therapy: Used when tumors cannot be surgically removed."
+    ],
+    "surgery": [
+      "Tumor Removal Surgery: Removes neurofibromas causing pain or neurological problems."
+    ],
+    "global_death_rate": "Low mortality rate",
+    "yearly_deaths": "Deaths mainly associated with malignant tumors"
+  },
+
+  "Polymerase Proofreading-Associated Polyposis": {
+    "description": "Polymerase Proofreading-Associated Polyposis is a hereditary cancer syndrome caused by mutations in the POLE gene. It leads to multiple colon polyps and increased colorectal cancer risk.",
+    "symptoms": [
+      "Multiple colon polyps",
+      "Rectal bleeding",
+      "Abdominal pain"
+    ],
+    "treatments": [
+      "Regular Colonoscopic Surveillance: Detects and removes polyps early.",
+      "Chemoprevention Therapy: Medications used to slow polyp development."
+    ],
+    "surgery": [
+      "Colectomy: Removal of the colon in severe cases to prevent cancer progression."
+    ],
+    "global_death_rate": "Associated with colorectal cancer mortality",
+    "yearly_deaths": "Part of global colorectal cancer deaths"
+  },
+
+  "Malignant Hyperthermia Susceptibility": {
+    "description": "Malignant Hyperthermia Susceptibility is a genetic disorder affecting skeletal muscle metabolism. It can trigger life-threatening reactions during exposure to certain anesthesia drugs.",
+    "symptoms": [
+      "Rapid increase in body temperature",
+      "Muscle rigidity",
+      "Rapid heart rate"
+    ],
+    "treatments": [
+      "Dantrolene Therapy: Medication used to stop the hyperthermic reaction.",
+      "Supportive Cooling Treatment: Helps reduce body temperature quickly."
+    ],
+    "surgery": [
+      "No direct surgery; condition managed during anesthesia."
+    ],
+    "global_death_rate": "Rare but life-threatening if untreated",
+    "yearly_deaths": "Very rare due to modern anesthesia monitoring"
+  },
+
+  "Tuberous Sclerosis Complex": {
+    "description": "Tuberous Sclerosis Complex is a genetic disorder that causes benign tumors to grow in organs such as the brain, kidneys, heart, and skin.",
+    "symptoms": [
+      "Seizures",
+      "Skin abnormalities",
+      "Kidney tumors",
+      "Developmental delays"
+    ],
+    "treatments": [
+      "mTOR Inhibitors: Drugs that reduce tumor growth.",
+      "Antiepileptic Medication: Controls seizure activity."
+    ],
+    "surgery": [
+      "Tumor Removal Surgery: Removes tumors affecting vital organs."
+    ],
+    "global_death_rate": "Variable depending on organ involvement",
+    "yearly_deaths": "Rare disease with limited mortality statistics"
+  },
+
+  "Dilated Cardiomyopathy": {
+    "description": "Dilated Cardiomyopathy is a condition in which the heart muscle becomes weakened and enlarged, reducing its ability to pump blood effectively.",
+    "symptoms": [
+      "Shortness of breath",
+      "Fatigue",
+      "Swelling in legs",
+      "Irregular heartbeat"
+    ],
+    "treatments": [
+      "Heart Failure Medication: Drugs that improve heart function and circulation.",
+      "Lifestyle Management: Includes diet and physical activity adjustments."
+    ],
+    "surgery": [
+      "Heart Transplant: Considered in severe cases when heart failure progresses."
+    ],
+    "global_death_rate": "Major cause of heart failure worldwide",
+    "yearly_deaths": "Hundreds of thousands of cardiovascular deaths globally"
+  },
+
+  "Usher Syndrome Type 2": {
+    "description": "Usher Syndrome Type 2 is a genetic disorder characterized by moderate hearing loss from birth and progressive vision loss due to retinitis pigmentosa.",
+    "symptoms": [
+      "Hearing loss",
+      "Night blindness",
+      "Progressive vision loss"
+    ],
+    "treatments": [
+      "Hearing Aids: Improve auditory perception in affected individuals.",
+      "Vision Rehabilitation Therapy: Helps manage progressive vision loss."
+    ],
+    "surgery": [
+      "Cochlear Implant Surgery: May improve hearing ability in severe cases."
+    ],
+    "global_death_rate": "Not typically life-threatening",
+    "yearly_deaths": "Primarily causes disability rather than mortality"
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph v2 - DNA Sequence Analysis</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <!-- 1. LOGIN VIEW -->
+    <div id="login-view" class="view-section active">
+        <div class="login-card card">
+            <h2>DeepMorph <span class="version">v2</span></h2>
+            <p>Clinical Practitioner Login</p>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Username" required autocomplete="off">
+                <input type="password" id="password" placeholder="Password" required>
+                <div id="login-error" class="validation-warning"
+                    style="visibility: visible; opacity: 1; transform: none; display:none; margin-bottom: 1rem;">
+                    Invalid credentials
+                </div>
+                <button type="submit" class="primary-btn w-full">Access Dashboard</button>
+            </form>
+            <div class="test-creds">Test credentials: admin / admin</div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN APP VIEW -->
+    <div id="app-view" class="view-section hidden">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>DeepMorph <span class="version">v2</span></h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="dashboard-section">
+                    <span class="icon">🔬</span> Dashboard
+                </li>
+                <li data-target="history-section">
+                    <span class="icon">📊</span> Assessment History
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="user-info">Logged in as: <strong id="logged-user">admin</strong></div>
+                <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+        </nav>
+
+        <main class="main-content layout-main">
+            <!-- 2.1 DASHBOARD SECTION -->
+            <section id="dashboard-section" class="content-section active">
+                <header class="page-header">
+                    <h2>New Sequence Analysis</h2>
+                    <p>Enter 100-base sequence for mutation screening.</p>
+                </header>
+
+                <div class="card input-section">
+                    <div class="input-header">
+                        <h3>DNA Sequence Input</h3>
+                        <div class="counter-badge">
+                            <span id="char-counter">0</span><span class="counter-max">/100</span>
+                        </div>
+                    </div>
+
+                    <textarea id="dna-input" spellcheck="false"
+                        placeholder="Enter exactly 100 base pairs (A, T, G, C)&#10;&#10;[Tip: Start sequence with 'A' for Normal result, anything else for Mutated]"></textarea>
+
+                    <div class="validation-warning" id="validation-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <span>Sequence must be exactly 100 bases.</span>
+                    </div>
+
+                    <div class="action-container action-bar-flex">
+                        <div id="download-bar" class="hidden">
+                            <button id="download-pdf-btn" class="secondary-btn">⬇ Download PDF Report</button>
+                        </div>
+                        <button id="analyze-btn" class="primary-btn" disabled>
+                            <span class="btn-text">Analyze Sequence</span>
+                            <div class="btn-loader" id="btn-loader">
+                                <div class="dna-spinner">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <span class="loading-text">Analyzing...</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="pdf-report-container">
+                    <section class="results-grid hidden" id="results-panel">
+                        <div class="card result-card" id="card-mutation">
+                            <h4>Mutation Analysis</h4>
+                            <div class="status-badge" id="mutation-status-badge">
+                                <span class="status-icon" id="mutation-icon">✓</span>
+                                <span class="status-text" id="mutation-status">Non-Mutated</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Computation Confidence</span>
+                                <div class="metric-value-container">
+                                    <span class="metric-value" id="mutation-confidence">99.8%</span>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="mutation-confidence-bar" style="width: 0%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card result-card" id="card-clinical">
+                            <h4>Clinical Interpretation</h4>
+                            <div class="data-group">
+                                <div class="data-item">
+                                    <span class="data-label">Significance</span>
+                                    <span class="data-value highlight" id="clinical-significance">Benign</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Risk Level</span>
+                                    <span class="data-value badge-low" id="risk-level">Low</span>
+                                </div>
+                            </div>
+                            <div class="metric-row mt-4">
+                                <span class="metric-label">Clinical Confidence</span>
+                                <div class="metric-value-container">
+                                    <span class="metric-value" id="clinical-confidence">96.2%</span>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="clinical-confidence-bar" style="width: 0%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card result-card hidden" id="card-gene">
+                            <h4>Genetic Prediction</h4>
+                            <div class="data-group">
+                                <div class="data-item">
+                                    <span class="data-label">Predicted Gene</span>
+                                    <span class="data-value highlight-blue" id="predicted-gene">BRCA1</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Predicted Disease</span>
+                                    <span class="data-value" id="predicted-disease">Breast Cancer</span>
+                                </div>
+                            </div>
+                            <div class="metric-row mt-4">
+                                <span class="metric-label">Gene Attribution Confidence</span>
+                                <div class="metric-value-container">
+                                    <span class="metric-value" id="gene-confidence">94.8%</span>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="gene-confidence-bar" style="width: 0%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card result-card disease-card hidden" id="card-disease">
+                            <h4>Disease Information</h4>
+                            <h5 id="disease-name">Disease Name</h5>
+                            <p class="disease-desc" id="disease-desc">Academic description goes here.</p>
+                            <div class="symptoms-section" id="symptoms-section">
+                                <h6>Associated Symptoms / Correlated Findings:</h6>
+                                <ul class="symptoms-list" id="symptoms-list"></ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- 2.2 HISTORY SECTION -->
+            <section id="history-section" class="content-section hidden">
+                <header class="page-header">
+                    <h2>Assessment History</h2>
+                    <p>Recent sequence screenings and logged results over time.</p>
+                </header>
+
+                <div class="card history-card">
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date Analyzed</th>
+                                    <th>Sequence Snippet</th>
+                                    <th>Status Analysis</th>
+                                    <th>Detected Gene</th>
+                                    <th>Risk Level</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table-body">
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding: 2rem; color:var(--text-muted);">
+                                        No history available. Run an analysis first.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

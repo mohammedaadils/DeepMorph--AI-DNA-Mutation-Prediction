@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Disease Knowledge</title>
+    <meta name="description" content="Disease intelligence for the predicted gene from genomic analysis">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases" class="active">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Disease Knowledge</h1>
+            <p>Disease intelligence for your predicted gene from the latest analysis.</p>
+        </header>
+
+        <!-- No data state -->
+        <div id="no-data-msg" class="glass-card empty-card" style="display:none;">
+            <div class="empty-icon">📖</div>
+            <h3>No Prediction Data Available</h3>
+            <p>Please <a href="/submit">submit a DNA sequence</a> first. Disease information will be shown based on the
+                predicted gene.</p>
+        </div>
+
+        <!-- Disease info for predicted gene -->
+        <div id="disease-content" style="display:none;">
+            <div class="glass-card" style="margin-bottom: 1.5rem; padding: 1rem 1.75rem;">
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Showing disease information linked to predicted gene: <strong style="color: var(--accent-blue);"
+                        id="disease-gene">—</strong>
+                </p>
+            </div>
+
+            <div class="disease-card" style="max-width: 900px;">
+                <h3 id="disease-name">—</h3>
+                <p class="disease-desc" id="disease-desc">—</p>
+
+                <div id="symptoms-section">
+                    <div class="disease-section-title">Symptoms</div>
+                    <ul id="disease-symptoms"></ul>
+                </div>
+
+                <div id="treatments-section">
+                    <div class="disease-section-title">Treatment Options</div>
+                    <ul id="disease-treatments"></ul>
+                </div>
+
+                <div id="surgery-section">
+                    <div class="disease-section-title">Surgical Procedures</div>
+                    <ul id="disease-surgery"></ul>
+                </div>
+
+                <div class="disease-meta">
+                    <span class="meta-tag">☠ Global Death Rate: <span id="disease-death-rate">N/A</span></span>
+                    <span class="meta-tag">📊 Yearly Deaths: <span id="disease-yearly-deaths">N/A</span></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

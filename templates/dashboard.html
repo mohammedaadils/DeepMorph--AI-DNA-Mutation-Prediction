@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepMorph AI — Dashboard</title>
+    <meta name="description" content="DeepMorph AI Genomic Analysis Dashboard — Clinical Overview">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🧬</span>
+            <span class="nav-title">DeepMorph <span class="version-badge">AI</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard" class="active">Dashboard</a></li>
+            <li><a href="/patients-page">Patients</a></li>
+            <li><a href="/submit">Submit Sequence</a></li>
+            <li><a href="/mutation">Mutation Analysis</a></li>
+            <li><a href="/clinical">Clinical Significance</a></li>
+            <li><a href="/diseases">Disease Knowledge</a></li>
+            <li><a href="/history-page">Assessment History</a></li>
+            <li><a href="/report">Generate Report</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span class="nav-user" id="nav-user">👤 Doctor</span>
+            <a href="/" class="logout-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-content">
+        <header class="page-header">
+            <h1>Clinical Dashboard</h1>
+            <p>Welcome back, <span id="welcome-user">Doctor</span>. Overview of your genomic analysis activity.</p>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="background: rgba(14, 165, 233, 0.15); color: #0ea5e9;">👥</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-patients">0</span>
+                    <span class="stat-label">Total Patients</span>
+                </div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="background: rgba(20, 184, 166, 0.15); color: #14b8a6;">🧬</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-sequences">0</span>
+                    <span class="stat-label">Sequences Analyzed</span>
+                </div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">⚠</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-high-risk">0</span>
+                    <span class="stat-label">High Risk Cases</span>
+                </div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">📊</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-recent">0</span>
+                    <span class="stat-label">Recent Analyses</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-header">
+            <h2>Quick Actions</h2>
+        </div>
+        <div class="quick-actions">
+            <a href="/patients-page" class="action-card glass-card">
+                <span class="action-icon">👥</span>
+                <span class="action-title">Manage Patients</span>
+                <span class="action-desc">Add, edit, or search patient records</span>
+            </a>
+            <a href="/submit" class="action-card glass-card">
+                <span class="action-icon">🧬</span>
+                <span class="action-title">Analyze DNA</span>
+                <span class="action-desc">Submit a new 100bp sequence</span>
+            </a>
+            <a href="/diseases" class="action-card glass-card">
+                <span class="action-icon">📖</span>
+                <span class="action-title">Disease Knowledge</span>
+                <span class="action-desc">Browse genetic disease database</span>
+            </a>
+            <a href="/history-page" class="action-card glass-card">
+                <span class="action-icon">📋</span>
+                <span class="action-title">View History</span>
+                <span class="action-desc">Review past assessments</span>
+            </a>
+        </div>
+
+        <!-- Recent Analyses -->
+        <div class="section-header">
+            <h2>Recent Analyses</h2>
+        </div>
+        <div class="glass-card table-card">
+            <div class="table-responsive">
+                <table class="data-table" id="recent-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Patient ID</th>
+                            <th>Sequence</th>
+                            <th>Mutation</th>
+                            <th>Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-table-body">
+                        <tr>
+                            <td colspan="5" class="empty-state">No analyses performed yet. Submit a DNA sequence to
+                                begin.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
