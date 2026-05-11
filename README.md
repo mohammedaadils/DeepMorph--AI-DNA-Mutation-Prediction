@@ -52,14 +52,21 @@ Model Architecture
 
 The DeepMorph model uses a hybrid deep learning architecture:
 
-1. Convolutional Neural Network (CNN)
-    * Extracts local nucleotide sequence patterns
-2. Long Short-Term Memory (LSTM)
-    * Captures sequential dependencies within DNA sequences
-3. Multi-Output Prediction Heads
-    * Mutation classification
-    * Gene prediction
-    * Clinical significance prediction
+Convolutional Neural Network (CNN)
+
+Extracts local nucleotide sequence patterns and mutation-related features from DNA sequences.
+
+Long Short-Term Memory (LSTM)
+
+Captures sequential dependencies and long-range relationships within genomic sequences.
+
+Multi-Output Prediction Heads
+
+The model simultaneously predicts:
+
+* Mutation classification
+* Gene prediction
+* Clinical significance prediction
 
 ⸻
 
@@ -141,6 +148,70 @@ Modules
 * Mutation Hotspot Visualization
 * Assessment History Module
 * Clinical Report Generation Module
+
+⸻
+
+Installation and Setup
+
+Clone Repository
+
+git clone https://github.com/mohammedaadils/DeepMorph--AI-DNA-Mutation-Prediction.git
+
+⸻
+
+Navigate to Project Folder
+
+cd DeepMorph--AI-DNA-Mutation-Prediction
+
+⸻
+
+Install Required Dependencies
+
+pip install fastapi uvicorn tensorflow numpy pandas scikit-learn matplotlib seaborn reportlab python-multipart jinja2
+
+⸻
+
+Run the FastAPI Server
+
+uvicorn app:app --reload
+
+⸻
+
+Open in Browser
+
+Visit:
+
+http://127.0.0.1:8000
+
+⸻
+
+Project Structure
+
+DeepMorph_Project
+│
+├── app.py
+├── deepmorph_top15_model.keras
+├── gene_encoder_top15.pkl
+├── clinical_encoder_top15.pkl
+├── gene_disease_map_top15.json
+├── disease_info_top15.json
+│
+├── static
+│     ├── style.css
+│     ├── script.js
+│
+├── templates
+│     ├── login.html
+│     ├── dashboard.html
+│     ├── patient_management.html
+│     ├── sequence_submission.html
+│     ├── mutation_analysis.html
+│     ├── clinical_significance.html
+│     ├── disease_knowledge.html
+│     ├── report_generation.html
+│     └── assessment_history.html
+│
+└── reports
 
 ⸻
 
