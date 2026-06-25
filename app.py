@@ -205,39 +205,39 @@ def compute_saliency_hotspot(sequence):
 
 @app.get("/")
 def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse(request, "login.html")
 
 @app.get("/dashboard")
 def dashboard_page(request: Request):
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+    return templates.TemplateResponse(request, "dashboard.html")
 
 @app.get("/patients-page")
 def patients_page(request: Request):
-    return templates.TemplateResponse("patient_management.html", {"request": request})
+    return templates.TemplateResponse(request, "patient_management.html")
 
 @app.get("/submit")
 def submit_page(request: Request):
-    return templates.TemplateResponse("sequence_submission.html", {"request": request})
+    return templates.TemplateResponse(request, "sequence_submission.html")
 
 @app.get("/mutation")
 def mutation_page(request: Request):
-    return templates.TemplateResponse("mutation_analysis.html", {"request": request})
+    return templates.TemplateResponse(request, "mutation_analysis.html")
 
 @app.get("/clinical")
 def clinical_page(request: Request):
-    return templates.TemplateResponse("clinical_significance.html", {"request": request})
+    return templates.TemplateResponse(request, "clinical_significance.html")
 
 @app.get("/diseases")
 def diseases_page(request: Request):
-    return templates.TemplateResponse("disease_knowledge.html", {"request": request})
+    return templates.TemplateResponse(request, "disease_knowledge.html")
 
 @app.get("/report")
 def report_page(request: Request):
-    return templates.TemplateResponse("report_generation.html", {"request": request})
+    return templates.TemplateResponse(request, "report_generation.html")
 
 @app.get("/history-page")
 def history_page(request: Request):
-    return templates.TemplateResponse("assessment_history.html", {"request": request})
+    return templates.TemplateResponse(request, "assessment_history.html")
 
 
 # ═══════════  API ENDPOINTS  ═══════════
