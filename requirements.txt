@@ -2,6 +2,7 @@ fastapi
 uvicorn
 tensorflow-cpu
 numpy
+scikit-learn
 jinja2
 reportlab
 python-multipart
