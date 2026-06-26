@@ -9,7 +9,7 @@ from datetime import datetime
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
@@ -94,6 +94,11 @@ class LoginInput(BaseModel):
     email: str
     password: str
 
+class RegisterInput(BaseModel):
+    name: str
+    email: str
+    password: str
+
 class PatientInput(BaseModel):
     name: str
     age: int
@@ -133,6 +138,7 @@ class ReportInput(BaseModel):
 history_db = []
 patients_db = {}
 valid_users = {"admin@deepmorph.com": "admin123"}
+active_sessions = {}  # session_token -> {"email": ..., "name": ...}
 dashboard_stats = {
     "total_sequences": 0,
     "high_risk_count": 0
@@ -201,42 +207,73 @@ def compute_saliency_hotspot(sequence):
     }
 
 
+def get_session_user(request: Request):
+    token = request.cookies.get("session_token")
+    if token and token in active_sessions:
+        return active_sessions[token]
+    return None
+
+
 # ═══════════  PAGE ROUTES (serve HTML templates)  ═══════════
 
 @app.get("/")
 def login_page(request: Request):
+    if get_session_user(request):
+        return RedirectResponse(url="/dashboard", status_code=302)
     return templates.TemplateResponse(request, "login.html")
+
+@app.get("/register")
+def register_page(request: Request):
+    if get_session_user(request):
+        return RedirectResponse(url="/dashboard", status_code=302)
+    return templates.TemplateResponse(request, "register.html")
 
 @app.get("/dashboard")
 def dashboard_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "dashboard.html")
 
 @app.get("/patients-page")
 def patients_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "patient_management.html")
 
 @app.get("/submit")
 def submit_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "sequence_submission.html")
 
 @app.get("/mutation")
 def mutation_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "mutation_analysis.html")
 
 @app.get("/clinical")
 def clinical_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "clinical_significance.html")
 
 @app.get("/diseases")
 def diseases_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "disease_knowledge.html")
 
 @app.get("/report")
 def report_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "report_generation.html")
 
 @app.get("/history-page")
 def history_page(request: Request):
+    if not get_session_user(request):
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse(request, "assessment_history.html")
 
 
@@ -245,8 +282,34 @@ def history_page(request: Request):
 @app.post("/login")
 def login(data: LoginInput):
     if valid_users.get(data.email) == data.password:
-        return {"status": "success", "email": data.email}
+        token = str(uuid.uuid4())
+        active_sessions[token] = {"email": data.email, "name": data.email.split("@")[0]}
+        response = JSONResponse(content={"status": "success", "email": data.email})
+        response.set_cookie(key="session_token", value=token, httponly=True, samesite="lax", max_age=86400)
+        return response
     return JSONResponse(status_code=401, content={"error": "Invalid email or password"})
+
+@app.post("/register")
+def register(data: RegisterInput):
+    if data.email in valid_users:
+        return JSONResponse(status_code=400, content={"error": "Email already registered"})
+    if len(data.password) < 6:
+        return JSONResponse(status_code=400, content={"error": "Password must be at least 6 characters"})
+    valid_users[data.email] = data.password
+    token = str(uuid.uuid4())
+    active_sessions[token] = {"email": data.email, "name": data.name}
+    response = JSONResponse(content={"status": "success", "email": data.email, "name": data.name})
+    response.set_cookie(key="session_token", value=token, httponly=True, samesite="lax", max_age=86400)
+    return response
+
+@app.get("/logout")
+def logout(request: Request):
+    token = request.cookies.get("session_token")
+    if token and token in active_sessions:
+        del active_sessions[token]
+    response = RedirectResponse(url="/", status_code=302)
+    response.delete_cookie(key="session_token")
+    return response
 
 
 # ── Patient Management ──

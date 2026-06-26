@@ -84,9 +84,11 @@ function handleLogout() {
     const btn = document.getElementById('logout-btn');
     if (btn) {
         btn.addEventListener('click', (e) => {
+            e.preventDefault();
             localStorage.removeItem('dm_user');
             localStorage.removeItem('dm_logged_in');
             sessionStorage.removeItem('prediction_data');
+            window.location.href = '/logout';
         });
     }
 }
@@ -114,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (path === '/' || path === '') {
         initLoginPage();
+    } else if (path === '/register') {
+        initRegisterPage();
     } else if (path === '/dashboard') {
         initDashboardPage();
     } else if (path === '/patients-page') {
@@ -138,11 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. LOGIN PAGE
 // ══════════════════════════════════
 function initLoginPage() {
-    // If already logged in, redirect
-    if (localStorage.getItem('dm_logged_in')) {
-        window.location.href = '/dashboard';
-        return;
-    }
 
     const form = document.getElementById('login-form');
     const errorEl = document.getElementById('login-error');
@@ -177,6 +176,53 @@ function initLoginPage() {
                 console.error(err);
                 errorEl.style.display = 'block';
                 loginBtn.classList.remove('loading');
+            }
+        });
+    }
+}
+
+
+// ══════════════════════════════════
+// REGISTER PAGE
+// ══════════════════════════════════
+function initRegisterPage() {
+    const form = document.getElementById('register-form');
+    const errorEl = document.getElementById('register-error');
+    const registerBtn = document.getElementById('register-btn');
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+
+            registerBtn.classList.add('loading');
+            errorEl.style.display = 'none';
+
+            try {
+                const res = await fetch('/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    localStorage.setItem('dm_logged_in', 'true');
+                    localStorage.setItem('dm_user', data.name || data.email.split('@')[0]);
+                    window.location.href = '/dashboard';
+                } else {
+                    const err = await res.json();
+                    errorEl.textContent = '⚠ ' + (err.error || 'Registration failed.');
+                    errorEl.style.display = 'block';
+                    registerBtn.classList.remove('loading');
+                }
+            } catch (err) {
+                console.error(err);
+                errorEl.textContent = '⚠ Connection error. Please try again.';
+                errorEl.style.display = 'block';
+                registerBtn.classList.remove('loading');
             }
         });
     }
